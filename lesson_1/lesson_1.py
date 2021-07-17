@@ -78,34 +78,102 @@ def print_task_description(task_number):
 Для решения используйте цикл while и арифметические операции.
 '''
 
-print_task_description(4)
+# print_task_description(4)
+#
+# number = 0
+# while True:
+#     number = input("Enter some positive number: ")
+#     if number.isdigit():
+#         break
+#     print("Incorrect number...", end=' ')
+#
+# max_digit = max(number)
+# print(f'Result of max function by string as list (alphabetically): {max_digit}')
+#
+# max_digit = 0
+# for (i, digit) in enumerate(number):
+#     current_digit = int(digit)
+#     max_digit = max(current_digit, max_digit)
+#     if max_digit == 9:
+#         break
+#
+# print(f'Result of iterations on string as list: {max_digit}')
+#
+# number = int(number)
+# max_digit = 0
+# while number > 0:
+#     current_digit = number % 10
+#     max_digit = max(current_digit, max_digit)
+#     if max_digit == 9:
+#         break
+#     number = number // 10
+#
+# print(f'Result of divisions in number: {max_digit}')
 
-number = 0
+'''
+5. Запросите у пользователя значения выручки и издержек фирмы. Определите, с каким
+финансовым результатом работает фирма. Например, прибыль — выручка больше издержек,
+или убыток — издержки больше выручки. Выведите соответствующее сообщение.
+Если фирма отработала с прибылью, вычислите рентабельность выручки. Это отношение
+прибыли к выручке. Далее запросите численность сотрудников фирмы и определите прибыль
+фирмы в расчёте на одного сотрудника.
+'''
+
+print_task_description(5)
+
+earnings = 0
+costs = 0
+
 while True:
-    number = input("Enter some positive number: ")
-    if number.isdigit():
+    earnings = input("Enter positive value of company's earnings: ")
+    try:
+        earnings = float(earnings)
         break
-    print("Incorrect number...", end=' ')
+    except ValueError:
+        print('Incorrect value...', end=' ')
 
-max_digit = max(number)
-print(f'Result of max function by string as list (alphabetically): {max_digit}')
-
-max_digit = 0
-for (i, digit) in enumerate(number):
-    current_digit = int(digit)
-    max_digit = max(current_digit, max_digit)
-    if max_digit == 9:
+while True:
+    costs = input("Enter positive value of company's costs: ")
+    try:
+        costs = float(costs)
         break
+    except ValueError:
+        print('Incorrect value...', end=' ')
 
-print(f'Result of iterations on string as list: {max_digit}')
+choices = ('N', 'n')
+changes = False
 
-number = int(number)
-max_digit = 0
-while number > 0:
-    current_digit = number % 10
-    max_digit = max(current_digit, max_digit)
-    if max_digit == 9:
+if earnings < 0:
+    choice = input('Earnings is less than zero. Do you want to transfer it to costs? [Y/n]: ')
+    if choice not in choices:
+        costs = costs - earnings
+        earnings = 0
+        changes = True
+
+if costs < 0:
+    choice = input('Costs is less than zero. Do you want to transfer it to earnings? [Y/n]: ')
+    if choice not in choices:
+        earnings = earnings - costs
+        costs = 0
+        changes = True
+
+if changes:
+    print(f"Corrected values: earnings is {earnings:.2f}, costs is {costs:.2f}")
+
+operation_profit = earnings - costs
+is_profit = operation_profit > 0
+result = 'Profit' if is_profit else 'Loss'
+print(f"Company worked with {result}: {operation_profit:.2f}")
+if is_profit:
+    ros = 100.0 * (operation_profit / earnings)
+    print(f"Return on sales (ROS) is {ros:.2f}%")
+
+employees_number = 0
+while True:
+    employees_number = input("Enter company's employees count: ")
+    if employees_number.isdigit():
+        employees_number = int(employees_number)
         break
-    number = number // 10
+    print('Incorrect value...', end=' ')
 
-print(f'Result of divisions in number: {max_digit}')
+print(f"{result} by employee is {operation_profit / employees_number:.2f}")
