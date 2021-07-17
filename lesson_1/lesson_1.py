@@ -232,4 +232,18 @@ while current_distance < target_distance:
 postfix_tuple = ('th', 'st', 'nd', 'rd')
 last_digit = days_to_target % 10
 postfix = postfix_tuple[0 if last_digit > 3 else last_digit]
-print(f'On the {days_to_target}{postfix} day, target distance was reached')
+print(f'Result by iterations. On the {days_to_target}{postfix} day, target distance was reached')
+
+import math  # of course this will raise a warning but it's only used here
+print('result by solving exponential inequality based on geometric progression')
+print('a(n) = a(n-1)*r i.e. a(n) = a*r^(n-1), where a is a(1) is start_distance and r is daily_improvement_ratio')
+print('in task n should be such that a(n) >= b, where b is target_distance and n is days_to_target')
+print('i.e. "a * r^(n-1) >= b"')
+print('"n >= log((b*r)/a)/log(r)" will be solved as equality: "n = ..."')
+print('ceil(n) returns smallest integer not less than n - the desired solution to the inequality')
+days_to_target = math.ceil((
+        math.log10(target_distance*daily_improvement_ratio/start_distance)) /
+        math.log10(daily_improvement_ratio))
+last_digit = days_to_target % 10
+postfix = postfix_tuple[0 if last_digit > 3 else last_digit]
+print(f'Result by geometric progression. On the {days_to_target}{postfix} day, target distance was reached')
