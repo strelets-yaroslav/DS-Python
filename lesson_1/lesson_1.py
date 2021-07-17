@@ -9,6 +9,10 @@ def print_task_description(task_number):
     print(f'{sep}')
 
 
+def print_incorrect():
+    print('Incorrect value...', end=' ')
+
+
 '''
 1. Поработайте с переменными, создайте несколько, выведите на экран. Запросите у
 пользователя некоторые числа и строки и сохраните в переменные, затем выведите на экран.
@@ -63,7 +67,7 @@ def print_task_description(task_number):
 #     number = input('Enter some number from 1 to 9: ')
 #     if len(number) == 1 and number.isdigit() and int(number) > 0:
 #         break
-#     print('Incorrect number...', end=' ')
+#     print_incorrect()
 #
 # double_number = int(number*2)
 # triple_number = int(number*3)
@@ -85,7 +89,7 @@ def print_task_description(task_number):
 #     number = input("Enter some positive number: ")
 #     if number.isdigit():
 #         break
-#     print("Incorrect number...", end=' ')
+#     print_incorrect()
 #
 # max_digit = max(number)
 # print(f'Result of max function by string as list (alphabetically): {max_digit}')
@@ -119,61 +123,111 @@ def print_task_description(task_number):
 фирмы в расчёте на одного сотрудника.
 '''
 
-print_task_description(5)
+# print_task_description(5)
+#
+# earnings = 0
+# costs = 0
+#
+# while True:
+#     earnings = input("Enter positive value of company's earnings: ")
+#     try:
+#         earnings = float(earnings)
+#         break
+#     except ValueError:
+#         print_incorrect()
+#
+# while True:
+#     costs = input("Enter positive value of company's costs: ")
+#     try:
+#         costs = float(costs)
+#         break
+#     except ValueError:
+#         print_incorrect()
+#
+# choices = ('N', 'n')
+# changes = False
+#
+# if earnings < 0:
+#     choice = input('Earnings is less than zero. Do you want to transfer it to costs? [Y/n]: ')
+#     if choice not in choices:
+#         costs = costs - earnings
+#         earnings = 0
+#         changes = True
+#
+# if costs < 0:
+#     choice = input('Costs is less than zero. Do you want to transfer it to earnings? [Y/n]: ')
+#     if choice not in choices:
+#         earnings = earnings - costs
+#         costs = 0
+#         changes = True
+#
+# if changes:
+#     print(f"Corrected values: earnings is {earnings:.2f}, costs is {costs:.2f}")
+#
+# operation_profit = earnings - costs
+# is_profit = operation_profit > 0
+# result = 'Profit' if is_profit else 'Loss'
+# print(f"Company worked with {result}: {operation_profit:.2f}")
+# if is_profit:
+#     ros = 100.0 * (operation_profit / earnings)
+#     print(f"Return on sales (ROS) is {ros:.2f}%")
+#
+# employees_number = 0
+# while True:
+#     employees_number = input("Enter company's employees count: ")
+#     if employees_number.isdigit():
+#         employees_number = int(employees_number)
+#         break
+#     print_incorrect()
+#
+# print(f"{result} by employee is {operation_profit / employees_number:.2f}")
 
-earnings = 0
-costs = 0
+'''
+6. Спортсмен занимается ежедневными пробежками. В первый день его результат составил a
+километров. Каждый день спортсмен увеличивал результат на 10% относительно
+предыдущего. Требуется определить номер дня, на который результат спортсмена составит не
+менее b километров. Программа должна принимать значения параметров a и b и выводить
+одно натуральное число — номер дня.
+'''
+
+print_task_description(6)
+
+start_distance = 0
+target_distance = 0
+days_to_target = 1
+daily_improvement_ratio = 1.1
 
 while True:
-    earnings = input("Enter positive value of company's earnings: ")
+    start_distance = input('Enter start distance: ')
     try:
-        earnings = float(earnings)
-        break
+        start_distance = float(start_distance)
+        if start_distance > 0:
+            break
+        else:
+            print_incorrect()
     except ValueError:
-        print('Incorrect value...', end=' ')
+        print_incorrect()
 
 while True:
-    costs = input("Enter positive value of company's costs: ")
+    target_distance = input('Enter target distance: ')
     try:
-        costs = float(costs)
-        break
+        target_distance = float(target_distance)
+        if target_distance < 0:
+            print_incorrect()
+        elif target_distance <= start_distance:
+            print('Target distance does not exceed the start distance...', end=' ')
+        else:
+            break
     except ValueError:
-        print('Incorrect value...', end=' ')
+        print_incorrect()
 
-choices = ('N', 'n')
-changes = False
+current_distance = start_distance
+while current_distance < target_distance:
+    days_to_target += 1
+    current_distance *= daily_improvement_ratio
+    # print(f'Day #{days_to_target}: distance is {current_distance:.2f}')
 
-if earnings < 0:
-    choice = input('Earnings is less than zero. Do you want to transfer it to costs? [Y/n]: ')
-    if choice not in choices:
-        costs = costs - earnings
-        earnings = 0
-        changes = True
-
-if costs < 0:
-    choice = input('Costs is less than zero. Do you want to transfer it to earnings? [Y/n]: ')
-    if choice not in choices:
-        earnings = earnings - costs
-        costs = 0
-        changes = True
-
-if changes:
-    print(f"Corrected values: earnings is {earnings:.2f}, costs is {costs:.2f}")
-
-operation_profit = earnings - costs
-is_profit = operation_profit > 0
-result = 'Profit' if is_profit else 'Loss'
-print(f"Company worked with {result}: {operation_profit:.2f}")
-if is_profit:
-    ros = 100.0 * (operation_profit / earnings)
-    print(f"Return on sales (ROS) is {ros:.2f}%")
-
-employees_number = 0
-while True:
-    employees_number = input("Enter company's employees count: ")
-    if employees_number.isdigit():
-        employees_number = int(employees_number)
-        break
-    print('Incorrect value...', end=' ')
-
-print(f"{result} by employee is {operation_profit / employees_number:.2f}")
+postfix_tuple = ('th', 'st', 'nd', 'rd')
+last_digit = days_to_target % 10
+postfix = postfix_tuple[0 if last_digit > 3 else last_digit]
+print(f'On the {days_to_target}{postfix} day, target distance was reached')
