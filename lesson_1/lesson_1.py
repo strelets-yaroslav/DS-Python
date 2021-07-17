@@ -56,18 +56,56 @@ def print_task_description(task_number):
 ввёл число 3. Считаем 3 + 33 + 333 = 369.
 '''
 
-print_task_description(3)
+# print_task_description(3)
+#
+# number = 0
+# while True:
+#     number = input('Enter some number from 1 to 9: ')
+#     if len(number) == 1 and number.isdigit() and int(number) > 0:
+#         break
+#     print('Incorrect number...', end=' ')
+#
+# double_number = int(number*2)
+# triple_number = int(number*3)
+# number = int(number)
+# # numbers_sum = number + double_number + triple_number
+# numbers_sum = sum([number, double_number, triple_number])
+# print(f'Sum of {number}, {double_number}, {triple_number} is {numbers_sum}')
+
+
+'''
+4. Пользователь вводит целое положительное число. Найдите самую большую цифру в числе.
+Для решения используйте цикл while и арифметические операции.
+'''
+
+print_task_description(4)
 
 number = 0
 while True:
-    number = input('Enter some number from 1 to 9: ')
-    if len(number) == 1 and number.isdigit() and int(number) > 0:
+    number = input("Enter some positive number: ")
+    if number.isdigit():
         break
-    print('Incorrect number...', end=' ')
+    print("Incorrect number...", end=' ')
 
-double_number = int(number*2)
-triple_number = int(number*3)
+max_digit = max(number)
+print(f'Result of max function by string as list (alphabetically): {max_digit}')
+
+max_digit = 0
+for (i, digit) in enumerate(number):
+    current_digit = int(digit)
+    max_digit = max(current_digit, max_digit)
+    if max_digit == 9:
+        break
+
+print(f'Result of iterations on string as list: {max_digit}')
+
 number = int(number)
-# numbers_sum = number + double_number + triple_number
-numbers_sum = sum([number, double_number, triple_number])
-print(f'Sum of {number}, {double_number}, {triple_number} is {numbers_sum}')
+max_digit = 0
+while number > 0:
+    current_digit = number % 10
+    max_digit = max(current_digit, max_digit)
+    if max_digit == 9:
+        break
+    number = number // 10
+
+print(f'Result of divisions in number: {max_digit}')
