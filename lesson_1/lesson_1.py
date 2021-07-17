@@ -31,21 +31,43 @@ def print_task_description(task_number):
 выведите в формате чч:мм:сс. Используйте форматирование строк.
 '''
 
-print_task_description(2)
+# print_task_description(2)
+#
+# raw_seconds = 0
+# while True:
+#     raw_seconds = input('Enter time in seconds: ')
+#     if raw_seconds.isdigit():
+#         raw_seconds = int(raw_seconds)
+#         break
+#     print('Digit is required...', end=' ')
+#
+# seconds = raw_seconds % 60
+# minutes = (raw_seconds % 3600) // 60
+# raw_hours = raw_seconds // 3600
+# print(f'{raw_hours:02d}:{minutes:02d}:{seconds:02d}')
+# if raw_hours > 23:
+#     hours = raw_hours % 24
+#     days = raw_hours // 24
+#     print(f'{days} days {hours:02d}:{minutes:02d}:{seconds:02d}')
 
-raw_seconds = 0
+
+'''
+3. Узнайте у пользователя число n. Найдите сумму чисел n + nn + nnn. Например, пользователь
+ввёл число 3. Считаем 3 + 33 + 333 = 369.
+'''
+
+print_task_description(3)
+
+number = 0
 while True:
-    raw_seconds = input('Enter time in seconds: ')
-    if raw_seconds.isdigit():
-        raw_seconds = int(raw_seconds)
+    number = input('Enter some number from 1 to 9: ')
+    if len(number) == 1 and number.isdigit() and int(number) > 0:
         break
-    print('Digit is required...', end=' ')
+    print('Incorrect number...', end=' ')
 
-seconds = raw_seconds % 60
-minutes = (raw_seconds % 3600) // 60
-raw_hours = raw_seconds // 3600
-print(f'{raw_hours:02d}:{minutes:02d}:{seconds:02d}')
-if raw_hours > 23:
-    hours = raw_hours % 24
-    days = raw_hours // 24
-    print(f'{days} days {hours:02d}:{minutes:02d}:{seconds:02d}')
+double_number = int(number*2)
+triple_number = int(number*3)
+number = int(number)
+# numbers_sum = number + double_number + triple_number
+numbers_sum = sum([number, double_number, triple_number])
+print(f'Sum of {number}, {double_number}, {triple_number} is {numbers_sum}')
