@@ -63,13 +63,13 @@ for item in parameters:
 
     # order will be saved
     analytics_3.update({item: list(dict.fromkeys([product[item] for (index, product) in products]))})
-    # analog of "values & for" logic using in-time creating set - by (add or True) in if-condition
+    # analog of "values & for" logic using in-place creating set - by (add or True) in if-condition
     unique = set()  # will store unique values
     analytics_4.update({
         item: [p[item] for (i, p) in products if p[item] not in unique and (unique.add(p[item]) or True)]
     })
 
 print(f"Analytics dictionary is: {analytics}")
-print(f"Analytics_2 dictionary is: {analytics_2}")
-print(f"Analytics_3 dictionary is: {analytics_3}")
-print(f"Analytics_4 dictionary is: {analytics_4}")
+print(f"Analytics_2 dictionary by using comprehension+set is: {analytics_2}")
+print(f"Analytics_3 dictionary by create dict from list of values as keys is: {analytics_3}")
+print(f"Analytics_4 dictionary by in-place creating set for unification values is: {analytics_4}")
