@@ -63,16 +63,17 @@ def get_numbers(number_type=int):
     """
 
     regulars = {
+        str: '^.*$',
         int: '^[0-9 ]+$',
         float: '^[0-9. ]+$',
-        str: False,
         bool: '^(False|True| )+$'
     }
 
     while True:
         numbers = input('Enter list of numbers separated by a space: ')
-        reg_template = regulars.get(number_type)
-        if not reg_template or re.match(reg_template, numbers):
+        if number_type not in regulars.keys():
+            number_type = str
+        if re.match(regulars[number_type], numbers):
             my_list = [number_type(number) for number in numbers.split()]
             break
         print_incorrect()
