@@ -4,6 +4,8 @@ This is the module 'helper' for python lessons
 Author = Yaroslav Strelets
 """
 
+import re
+
 
 def print_task_description(task_number):
     sep = '-' * 80
@@ -29,7 +31,6 @@ def get_number(prompt='Enter number', number_type=int, is_pos=False, is_neg=Fals
     :param non_zero: is number not equal zero (default - False) - boolean
     :return: number - type of number_type param
     """
-    
     while True:
         user_number = input(prompt + ': ')
         try:
@@ -51,3 +52,29 @@ def get_number(prompt='Enter number', number_type=int, is_pos=False, is_neg=Fals
 
         print_incorrect()
     return user_number
+
+
+def get_numbers(number_type=int):
+    """
+    takes user input as string of numbers separated by a space and tries to convert each of them to 'number_type' type
+
+    :param number_type: type for number's converting (to [int (default) | float | str | bool] only)
+    :return: list of numbers
+    """
+
+    regulars = {
+        str: '^.*$',
+        int: '^[0-9 ]+$',
+        float: '^[0-9. ]+$',
+        bool: '^(False|True| )+$'
+    }
+
+    while True:
+        numbers = input('Enter list of numbers separated by a space: ')
+        if number_type not in regulars.keys():
+            number_type = str
+        if re.match(regulars[number_type], numbers):
+            my_list = [number_type(number) for number in numbers.split()]
+            break
+        print_incorrect()
+    return my_list
