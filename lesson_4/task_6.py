@@ -17,21 +17,22 @@ import helper
 helper.print_task_description(6)
 
 
-def count_example():
-    start_number = helper.get_number("Enter start number")
-    end_number = helper.get_number("Enter end number")
-    num_iter = count(start_number)
-    for i in range(start_number, end_number + 1):
+def count_example(start_num, end_num):
+    num_iter = count(start_num)
+    for i in range(start_num, end_num + 1):
         print(next(num_iter))
 
 
-def cycle_example():
-    my_list = helper.get_numbers(None)
-    max_iterations = helper.get_number("Enter maximum number of cycle steps", is_pos=True)
+def cycle_example(max_iter, my_list):
     list_iter = cycle(my_list)
-    for i in range(max_iterations):
+    for i in range(max_iter):
         print(next(list_iter))
 
 
-count_example()
-cycle_example()
+start_number = helper.get_number("Enter start number")
+end_number = helper.get_number("Enter end number")
+count_example(start_number, end_number)
+
+max_iterations = helper.get_number("Enter maximum number of cycle steps", is_pos=True)
+my_list = helper.get_numbers(None)
+cycle_example(max_iterations, my_list)

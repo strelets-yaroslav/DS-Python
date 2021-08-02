@@ -1,7 +1,6 @@
 __author__ = "Yaroslav Strelets"
 
-from math import factorial as math_fact
-from functools import reduce
+from math import factorial as mfact
 import helper
 
 '''
@@ -16,23 +15,16 @@ import helper
 helper.print_task_description(7)
 
 
-def multiply_elements(prev_el, el):
-    return prev_el * el
-
-
 def fact(n):
-    for element in range(1, n + 1):
-        yield reduce(multiply_elements, [num for num in range(1, element + 1)])
-
-
-def fact_w_math(n):
-    for element in range(1, n + 1):
-        yield math_fact(element)
+    f = 1
+    for i in range(1, n + 1):
+        f *= i
+        yield f
 
 
 max_number = helper.get_number("Enter max number fo factorials")
 for number, factorial in enumerate(fact(max_number), 1):
-    print(f"Factorial with reduce of {number} is {factorial}")
+    print(f"Factorial of {number} is {factorial}")
 
-for number, factorial in enumerate(fact_w_math(max_number), 1):
-    print(f"Factorial with math of {number} is {factorial}")
+for number in range(1, max_number + 1):
+    print(f"Factorial with math of {number} is {mfact(number)}")

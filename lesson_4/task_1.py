@@ -13,6 +13,11 @@ import helper as hlp
 параметрами.
 '''
 
+
+def calc_salary(hrs_worked, rate, premium):
+    return float(hrs_worked) * float(rate) + float(premium)
+
+
 if len(argv) != 4:
     print("Use script with 3 parameters (each is the float type!): [hours_worked] [rate_per_hour] [premium]\n"
           "Result of script will be Help or Salary value based on your three parameters.")
@@ -20,6 +25,6 @@ else:
     script_name, hours_worked, rate_per_hour, premium = argv
     hlp.print_task_description(1)
     try:
-        print(f"Salary is {float(hours_worked) * float(rate_per_hour) + float(premium)}.")
+        print(f"Salary is {calc_salary(hours_worked, rate_per_hour, premium)}.")
     except ValueError:
         hlp.print_incorrect()
